@@ -1,3 +1,13 @@
+
+
+/**
+ * rather than relying on specific tags or structural choices. By using role-based queries
+ * getByRole and text-based checks getByText, we ensure that our tests
+ * won't break if the component's internal implementation changes.
+ * */
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Counter from "../sharedComponent/Counter.tsx";

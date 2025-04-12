@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import React from "react";
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Login from '../sharedComponent/Login';

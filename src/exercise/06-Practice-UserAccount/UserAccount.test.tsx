@@ -1,8 +1,3 @@
-// # Practice: User Account Component
-// This test suite focuses on verifying the UserAccount component's behavior using React Testing Library.
-// We use userEvent (even though there's no "real" user action tested here) to stay consistent with best practices
-// and ensure our tests remain implementation-detail-free.
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import React from "react";
@@ -11,6 +6,14 @@ import userEvent from "@testing-library/user-event";
 import { UserAccount } from "./UserAccount";
 import '@testing-library/jest-dom'
 
+/**
+ * These tests stay implementation free from testing since we fetch the components
+ * using the getByText and getByRole by finding the correct elements we need to test
+ * ----------------------------------------------------------------------------------
+ * Test 1 checks if given a user the components renders the expected fields
+ * test 2 checks if the user is a manager it displays the edit button and is clickable
+ * test 2 checks if the user is not a manager the edit button should not be rendered by the component
+ */
 
 describe("UserAccount Component", () => {
   test("renders the component correctly with a user prop", () => {
@@ -22,9 +25,7 @@ describe("UserAccount Component", () => {
 
     render(<UserAccount user={mockUser} />);
 
-    // Check the heading
     expect(screen.getByText("User Profile")).toBeInTheDocument();
-    // Check the user's name is rendered
     expect(screen.getByText(/Name:/i)).toBeInTheDocument();
     expect(screen.getByText(/Jane Doe/i)).toBeInTheDocument();
   });
@@ -38,13 +39,10 @@ describe("UserAccount Component", () => {
 
     render(<UserAccount user={mockManager} />);
 
-    // The Edit button should be visible
     const editButton = screen.getByRole("button", { name: /Edit/i });
     expect(editButton).toBeInTheDocument();
 
-    // Example user interaction (though no state changes here)
     await userEvent.click(editButton);
-    // We don't have a handler in the component, but this ensures userEvent works as expected
   });
 
   test("does NOT display the Edit button when user is not a manager", () => {
@@ -56,7 +54,6 @@ describe("UserAccount Component", () => {
 
     render(<UserAccount user={mockNonManager} />);
 
-    // The Edit button should not exist in the DOM at all
     expect(screen.queryByRole("button", { name: /Edit/i })).toBeNull();
   });
 });
